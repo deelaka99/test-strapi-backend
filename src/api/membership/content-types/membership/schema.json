@@ -32,6 +32,20 @@
     "description": {
       "type": "text",
       "required": true
+    },
+    "starting_date": {
+      "type": "date",
+      "required": true
+    },
+    "ending_date": {
+      "type": "date",
+      "required": true
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::customer.customer",
+      "inversedBy": "membership"
     }
   }
 }

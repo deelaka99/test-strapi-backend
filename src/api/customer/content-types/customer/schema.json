@@ -39,6 +39,12 @@
       "type": "email",
       "required": true,
       "unique": true
+    },
+    "membership": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::membership.membership",
+      "mappedBy": "customer"
     }
   }
 }

@@ -817,6 +817,11 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
         maxLength: 12;
       }>;
     email: Attribute.Email & Attribute.Required & Attribute.Unique;
+    membership: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'api::membership.membership'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -852,6 +857,13 @@ export interface ApiMembershipMembership extends Schema.CollectionType {
     price: Attribute.Decimal & Attribute.Required;
     duration: Attribute.Decimal & Attribute.Required;
     description: Attribute.Text & Attribute.Required;
+    starting_date: Attribute.Date & Attribute.Required;
+    ending_date: Attribute.Date & Attribute.Required;
+    customer: Attribute.Relation<
+      'api::membership.membership',
+      'oneToOne',
+      'api::customer.customer'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
