@@ -362,88 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCustomerCustomer extends Schema.CollectionType {
-  collectionName: 'customers';
-  info: {
-    singularName: 'customer';
-    pluralName: 'customers';
-    displayName: 'Customer';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    customer_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
-    first_name: Attribute.String & Attribute.Required;
-    last_name: Attribute.String & Attribute.Required;
-    mobile_no: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          max: 10;
-        },
-        number
-      >;
-    NIC: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        maxLength: 12;
-      }>;
-    email: Attribute.Email & Attribute.Required & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::customer.customer',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::customer.customer',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiMembershipMembership extends Schema.CollectionType {
-  collectionName: 'memberships';
-  info: {
-    singularName: 'membership';
-    pluralName: 'memberships';
-    displayName: 'membership';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    membership_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
-    membership_type: Attribute.String & Attribute.Required;
-    price: Attribute.Decimal & Attribute.Required;
-    duration: Attribute.Decimal & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::membership.membership',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::membership.membership',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -870,6 +788,96 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCustomerCustomer extends Schema.CollectionType {
+  collectionName: 'customers';
+  info: {
+    singularName: 'customer';
+    pluralName: 'customers';
+    displayName: 'Customer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    customer_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    first_name: Attribute.String & Attribute.Required;
+    last_name: Attribute.String & Attribute.Required;
+    NIC: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        maxLength: 12;
+      }>;
+    email: Attribute.Email & Attribute.Required & Attribute.Unique;
+    mobile_number: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
+    membership: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'api::membership.membership'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMembershipMembership extends Schema.CollectionType {
+  collectionName: 'memberships';
+  info: {
+    singularName: 'membership';
+    pluralName: 'memberships';
+    displayName: 'membership';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    membership_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    membership_type: Attribute.String & Attribute.Required;
+    price: Attribute.Decimal & Attribute.Required;
+    duration: Attribute.Decimal & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    customer: Attribute.Relation<
+      'api::membership.membership',
+      'oneToOne',
+      'api::customer.customer'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::membership.membership',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::membership.membership',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -880,8 +888,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::customer.customer': ApiCustomerCustomer;
-      'api::membership.membership': ApiMembershipMembership;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -890,6 +896,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::customer.customer': ApiCustomerCustomer;
+      'api::membership.membership': ApiMembershipMembership;
     }
   }
 }

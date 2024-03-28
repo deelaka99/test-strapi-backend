@@ -4,7 +4,8 @@
   "info": {
     "singularName": "customer",
     "pluralName": "customers",
-    "displayName": "Customer"
+    "displayName": "Customer",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -24,11 +25,6 @@
       "type": "string",
       "required": true
     },
-    "mobile_no": {
-      "type": "integer",
-      "max": 10,
-      "required": true
-    },
     "NIC": {
       "type": "string",
       "required": true,
@@ -39,6 +35,17 @@
       "type": "email",
       "required": true,
       "unique": true
+    },
+    "mobile_number": {
+      "type": "string",
+      "maxLength": 10,
+      "required": true
+    },
+    "membership": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::membership.membership",
+      "inversedBy": "customer"
     }
   }
 }

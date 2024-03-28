@@ -32,6 +32,12 @@
     "description": {
       "type": "text",
       "required": true
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::customer.customer",
+      "mappedBy": "membership"
     }
   }
 }
