@@ -4,7 +4,8 @@
   "info": {
     "singularName": "membership",
     "pluralName": "memberships",
-    "displayName": "membership"
+    "displayName": "membership",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,19 +13,25 @@
   "pluginOptions": {},
   "attributes": {
     "membership_id": {
-      "type": "integer"
+      "type": "integer",
+      "unique": true,
+      "required": true
     },
     "membership_type": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "price": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true
     },
     "duration": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     }
   }
 }

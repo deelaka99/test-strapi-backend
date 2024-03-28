@@ -368,16 +368,17 @@ export interface ApiMembershipMembership extends Schema.CollectionType {
     singularName: 'membership';
     pluralName: 'memberships';
     displayName: 'membership';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    membership_id: Attribute.Integer;
-    membership_type: Attribute.String;
-    price: Attribute.Decimal;
-    duration: Attribute.Decimal;
-    description: Attribute.Text;
+    membership_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    membership_type: Attribute.String & Attribute.Required;
+    price: Attribute.Decimal & Attribute.Required;
+    duration: Attribute.Decimal & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
