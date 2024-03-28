@@ -806,6 +806,21 @@ export interface ApiBookingBooking extends Schema.CollectionType {
     parking_access: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<true>;
+    customer: Attribute.Relation<
+      'api::booking.booking',
+      'oneToOne',
+      'api::customer.customer'
+    >;
+    service: Attribute.Relation<
+      'api::booking.booking',
+      'manyToOne',
+      'api::service.service'
+    >;
+    time_slot: Attribute.Relation<
+      'api::booking.booking',
+      'oneToOne',
+      'api::time-slot.time-slot'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -847,7 +862,7 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
         },
         number
       >;
-    nic: Attribute.String &
+    NIC: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
       Attribute.SetMinMaxLength<{
@@ -858,6 +873,11 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
       'api::customer.customer',
       'oneToOne',
       'api::membership.membership'
+    >;
+    booking: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'api::booking.booking'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -925,6 +945,7 @@ export interface ApiServiceService extends Schema.CollectionType {
     singularName: 'service';
     pluralName: 'services';
     displayName: 'Service';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -938,6 +959,16 @@ export interface ApiServiceService extends Schema.CollectionType {
     price: Attribute.Decimal & Attribute.Required;
     available_workspace_qty: Attribute.Integer & Attribute.Required;
     people_qty: Attribute.Integer & Attribute.Required;
+    bookings: Attribute.Relation<
+      'api::service.service',
+      'oneToMany',
+      'api::booking.booking'
+    >;
+    time_slots: Attribute.Relation<
+      'api::service.service',
+      'oneToMany',
+      'api::time-slot.time-slot'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -976,6 +1007,16 @@ export interface ApiTimeSlotTimeSlot extends Schema.CollectionType {
     ending_hour: Attribute.Time &
       Attribute.Required &
       Attribute.DefaultTo<'01:00'>;
+    booking: Attribute.Relation<
+      'api::time-slot.time-slot',
+      'oneToOne',
+      'api::booking.booking'
+    >;
+    service: Attribute.Relation<
+      'api::time-slot.time-slot',
+      'manyToOne',
+      'api::service.service'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

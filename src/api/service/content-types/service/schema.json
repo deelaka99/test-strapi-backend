@@ -4,7 +4,8 @@
   "info": {
     "singularName": "service",
     "pluralName": "services",
-    "displayName": "Service"
+    "displayName": "Service",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -43,6 +44,18 @@
     "people_qty": {
       "type": "integer",
       "required": true
+    },
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "service"
+    },
+    "time_slots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::time-slot.time-slot",
+      "mappedBy": "service"
     }
   }
 }

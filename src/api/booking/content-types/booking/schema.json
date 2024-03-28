@@ -29,6 +29,24 @@
       "type": "boolean",
       "required": true,
       "default": true
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::customer.customer",
+      "mappedBy": "booking"
+    },
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
+      "inversedBy": "bookings"
+    },
+    "time_slot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::time-slot.time-slot",
+      "mappedBy": "booking"
     }
   }
 }
