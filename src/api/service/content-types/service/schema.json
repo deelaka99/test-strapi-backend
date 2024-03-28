@@ -50,6 +50,12 @@
       "relation": "oneToMany",
       "target": "api::booking.booking",
       "mappedBy": "service"
+    },
+    "time_slots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::time-slot.time-slot",
+      "mappedBy": "service"
     }
   }
 }
