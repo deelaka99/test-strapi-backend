@@ -30,7 +30,7 @@
       "max": 10,
       "required": true
     },
-    "nic": {
+    "NIC": {
       "type": "string",
       "required": true,
       "unique": true,
@@ -46,6 +46,12 @@
       "relation": "oneToOne",
       "target": "api::membership.membership",
       "mappedBy": "customer"
+    },
+    "booking": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::booking.booking",
+      "inversedBy": "customer"
     }
   }
 }

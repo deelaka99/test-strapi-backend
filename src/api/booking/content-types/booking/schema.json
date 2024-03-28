@@ -29,6 +29,12 @@
       "type": "boolean",
       "required": true,
       "default": true
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::customer.customer",
+      "mappedBy": "booking"
     }
   }
 }

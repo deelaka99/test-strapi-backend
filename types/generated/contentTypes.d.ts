@@ -806,6 +806,11 @@ export interface ApiBookingBooking extends Schema.CollectionType {
     parking_access: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<true>;
+    customer: Attribute.Relation<
+      'api::booking.booking',
+      'oneToOne',
+      'api::customer.customer'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -847,7 +852,7 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
         },
         number
       >;
-    nic: Attribute.String &
+    NIC: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
       Attribute.SetMinMaxLength<{
@@ -858,6 +863,11 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
       'api::customer.customer',
       'oneToOne',
       'api::membership.membership'
+    >;
+    booking: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'api::booking.booking'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
