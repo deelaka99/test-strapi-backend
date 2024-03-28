@@ -30,6 +30,12 @@
       "type": "time",
       "required": true,
       "default": "01:00"
+    },
+    "booking": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::booking.booking",
+      "inversedBy": "time_slot"
     }
   }
 }

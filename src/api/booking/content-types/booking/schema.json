@@ -41,6 +41,12 @@
       "relation": "manyToOne",
       "target": "api::service.service",
       "inversedBy": "bookings"
+    },
+    "time_slot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::time-slot.time-slot",
+      "mappedBy": "booking"
     }
   }
 }
