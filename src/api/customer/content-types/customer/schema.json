@@ -4,7 +4,8 @@
   "info": {
     "singularName": "customer",
     "pluralName": "customers",
-    "displayName": "Customer"
+    "displayName": "Customer",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -29,7 +30,7 @@
       "max": 10,
       "required": true
     },
-    "NIC": {
+    "nic": {
       "type": "string",
       "required": true,
       "unique": true,

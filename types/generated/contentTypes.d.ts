@@ -830,6 +830,7 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     singularName: 'customer';
     pluralName: 'customers';
     displayName: 'Customer';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -846,7 +847,7 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
         },
         number
       >;
-    NIC: Attribute.String &
+    nic: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
       Attribute.SetMinMaxLength<{
@@ -955,6 +956,44 @@ export interface ApiServiceService extends Schema.CollectionType {
   };
 }
 
+export interface ApiTimeSlotTimeSlot extends Schema.CollectionType {
+  collectionName: 'time_slots';
+  info: {
+    singularName: 'time-slot';
+    pluralName: 'time-slots';
+    displayName: 'Time_slot';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    time_slot_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    time_slot_title: Attribute.String & Attribute.Required;
+    starting_hour: Attribute.Time &
+      Attribute.Required &
+      Attribute.DefaultTo<'00:00'>;
+    ending_hour: Attribute.Time &
+      Attribute.Required &
+      Attribute.DefaultTo<'01:00'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::time-slot.time-slot',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::time-slot.time-slot',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -977,6 +1016,7 @@ declare module '@strapi/types' {
       'api::customer.customer': ApiCustomerCustomer;
       'api::membership.membership': ApiMembershipMembership;
       'api::service.service': ApiServiceService;
+      'api::time-slot.time-slot': ApiTimeSlotTimeSlot;
     }
   }
 }
