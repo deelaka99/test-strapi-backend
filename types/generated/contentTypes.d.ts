@@ -811,6 +811,11 @@ export interface ApiBookingBooking extends Schema.CollectionType {
       'oneToOne',
       'api::customer.customer'
     >;
+    service: Attribute.Relation<
+      'api::booking.booking',
+      'manyToOne',
+      'api::service.service'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -935,6 +940,7 @@ export interface ApiServiceService extends Schema.CollectionType {
     singularName: 'service';
     pluralName: 'services';
     displayName: 'Service';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -948,6 +954,11 @@ export interface ApiServiceService extends Schema.CollectionType {
     price: Attribute.Decimal & Attribute.Required;
     available_workspace_qty: Attribute.Integer & Attribute.Required;
     people_qty: Attribute.Integer & Attribute.Required;
+    bookings: Attribute.Relation<
+      'api::service.service',
+      'oneToMany',
+      'api::booking.booking'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

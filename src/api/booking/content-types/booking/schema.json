@@ -35,6 +35,12 @@
       "relation": "oneToOne",
       "target": "api::customer.customer",
       "mappedBy": "booking"
+    },
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
+      "inversedBy": "bookings"
     }
   }
 }
