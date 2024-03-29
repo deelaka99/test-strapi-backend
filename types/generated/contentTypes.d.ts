@@ -811,11 +811,6 @@ export interface ApiBookingBooking extends Schema.CollectionType {
       'oneToOne',
       'api::customer.customer'
     >;
-    service: Attribute.Relation<
-      'api::booking.booking',
-      'manyToOne',
-      'api::service.service'
-    >;
     time_slot: Attribute.Relation<
       'api::booking.booking',
       'oneToOne',
@@ -959,16 +954,7 @@ export interface ApiServiceService extends Schema.CollectionType {
     price: Attribute.Decimal & Attribute.Required;
     available_workspace_qty: Attribute.Integer & Attribute.Required;
     people_qty: Attribute.Integer & Attribute.Required;
-    bookings: Attribute.Relation<
-      'api::service.service',
-      'oneToMany',
-      'api::booking.booking'
-    >;
-    time_slots: Attribute.Relation<
-      'api::service.service',
-      'oneToMany',
-      'api::time-slot.time-slot'
-    >;
+    whatsappLink: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1011,11 +997,6 @@ export interface ApiTimeSlotTimeSlot extends Schema.CollectionType {
       'api::time-slot.time-slot',
       'oneToOne',
       'api::booking.booking'
-    >;
-    service: Attribute.Relation<
-      'api::time-slot.time-slot',
-      'manyToOne',
-      'api::service.service'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
