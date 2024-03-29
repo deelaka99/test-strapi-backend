@@ -802,7 +802,7 @@ export interface ApiBookingBooking extends Schema.CollectionType {
   attributes: {
     book_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
     date: Attribute.Date & Attribute.Required;
-    time: Attribute.Time & Attribute.Required;
+    time: Attribute.Time & Attribute.Required & Attribute.DefaultTo<'00:00'>;
     parking_access: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<true>;
