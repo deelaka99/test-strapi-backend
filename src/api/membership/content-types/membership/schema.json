@@ -19,27 +19,33 @@
     },
     "membership_type": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "free"
     },
     "price": {
       "type": "decimal",
-      "required": true
+      "required": true,
+      "default": 1000
     },
     "duration": {
       "type": "decimal",
-      "required": true
+      "required": true,
+      "default": 2.5
     },
     "description": {
       "type": "text",
-      "required": true
+      "required": true,
+      "default": "sample description"
     },
     "starting_date": {
       "type": "date",
-      "required": true
+      "required": true,
+      "default": "2024-03-29"
     },
     "ending_date": {
       "type": "date",
-      "required": true
+      "required": true,
+      "default": "2024-03-29"
     },
     "customer": {
       "type": "relation",

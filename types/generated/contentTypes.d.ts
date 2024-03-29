@@ -801,7 +801,9 @@ export interface ApiBookingBooking extends Schema.CollectionType {
   };
   attributes: {
     book_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
-    date: Attribute.Date & Attribute.Required;
+    date: Attribute.Date &
+      Attribute.Required &
+      Attribute.DefaultTo<'2024-03-29'>;
     time: Attribute.Time & Attribute.Required & Attribute.DefaultTo<'00:00'>;
     parking_access: Attribute.Boolean &
       Attribute.Required &
@@ -847,22 +849,19 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
   };
   attributes: {
     customer_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
-    first_name: Attribute.String & Attribute.Required;
-    last_name: Attribute.String & Attribute.Required;
-    mobile_no: Attribute.Integer &
+    first_name: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          max: 10;
-        },
-        number
-      >;
-    NIC: Attribute.String &
+      Attribute.DefaultTo<'Test1'>;
+    last_name: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'test'>;
+    nic: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
       Attribute.SetMinMaxLength<{
         maxLength: 12;
-      }>;
+      }> &
+      Attribute.DefaultTo<'200307911760'>;
     email: Attribute.Email & Attribute.Required & Attribute.Unique;
     membership: Attribute.Relation<
       'api::customer.customer',
@@ -874,6 +873,12 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
       'oneToOne',
       'api::booking.booking'
     >;
+    mobile_no: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }> &
+      Attribute.DefaultTo<'0777777777'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -905,12 +910,20 @@ export interface ApiMembershipMembership extends Schema.CollectionType {
   };
   attributes: {
     membership_id: Attribute.Integer & Attribute.Required & Attribute.Unique;
-    membership_type: Attribute.String & Attribute.Required;
-    price: Attribute.Decimal & Attribute.Required;
-    duration: Attribute.Decimal & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    starting_date: Attribute.Date & Attribute.Required;
-    ending_date: Attribute.Date & Attribute.Required;
+    membership_type: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'free'>;
+    price: Attribute.Decimal & Attribute.Required & Attribute.DefaultTo<1000>;
+    duration: Attribute.Decimal & Attribute.Required & Attribute.DefaultTo<2.5>;
+    description: Attribute.Text &
+      Attribute.Required &
+      Attribute.DefaultTo<'sample description'>;
+    starting_date: Attribute.Date &
+      Attribute.Required &
+      Attribute.DefaultTo<'2024-03-29'>;
+    ending_date: Attribute.Date &
+      Attribute.Required &
+      Attribute.DefaultTo<'2024-03-29'>;
     customer: Attribute.Relation<
       'api::membership.membership',
       'oneToOne',
