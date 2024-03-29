@@ -19,22 +19,22 @@
     },
     "first_name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "regex": "^[A-Za-z]{2,30}$",
+      "default": "Test1"
     },
     "last_name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "regex": "^[A-Za-z]{2,30}$",
+      "default": "test"
     },
-    "mobile_no": {
-      "type": "integer",
-      "max": 10,
-      "required": true
-    },
-    "NIC": {
+    "nic": {
       "type": "string",
       "required": true,
       "unique": true,
-      "maxLength": 12
+      "maxLength": 12,
+      "default": "200307911760"
     },
     "email": {
       "type": "email",
@@ -52,6 +52,13 @@
       "relation": "oneToOne",
       "target": "api::booking.booking",
       "inversedBy": "customer"
+    },
+    "mobile_no": {
+      "type": "string",
+      "required": true,
+      "maxLength": 10,
+      "default": "0777777777",
+      "regex": "^0[1-9][0-9]{8}$"
     }
   }
 }

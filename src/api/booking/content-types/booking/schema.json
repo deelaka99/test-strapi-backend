@@ -19,11 +19,13 @@
     },
     "date": {
       "type": "date",
-      "required": true
+      "required": true,
+      "default": "2024-03-29"
     },
     "time": {
       "type": "time",
-      "required": true
+      "required": true,
+      "default": "00:00"
     },
     "parking_access": {
       "type": "boolean",
